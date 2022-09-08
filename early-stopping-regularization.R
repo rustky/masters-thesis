@@ -17,7 +17,7 @@ function.list <- list("subtrain"=subtrain, "validation"=validation)
 for(func.names in names(function.list)){
   for(input in x){
     y <- data.table()
-    y$epoch <- input
+    y$hyperparameter <- input
     y$loss <- sapply(input, function.list[[func.names]])
     y$set <- func.names
     y.list[[paste(func.names, input)]] <- y
@@ -27,6 +27,6 @@ for(func.names in names(function.list)){
 output.dt <- do.call(rbind, y.list)
 
 ggplot(output.dt)+
-  geom_line(aes(epoch, loss, color=set))+
+  geom_line(aes(hyperparameter, loss, color=set))+
   geom_vline(xintercept=2, color='red', linetype='dashed')+
   ggtitle("Early Stopping Regularization")
