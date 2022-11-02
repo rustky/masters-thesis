@@ -38,5 +38,7 @@ ggplot(y)+
   geom_label(data = y.label, aes(x=input, y=output, label=algorithm),
              nudge_x = -0.35,
              nudge_y = 3)+
-  ggtitle("Big-O Notation Review")
+  ggtitle("Big-O Notation Review")+
+  ylab("Output of f(n)")+
+  xlab("Input size n")
   
