@@ -39,6 +39,6 @@ ggplot(dt)+
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "black"),
-        text = element_text(size = 15, face = "bold"))
+        text = element_text(size = 20, face = "bold"))
   
   
