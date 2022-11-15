@@ -32,6 +32,8 @@ for(i in names(functions)){
 y <- do.call("rbind", y.list)
 y$input <- rep(1:10,4)
 y.label <- y[y[, .I[output == max(output)], by=func]$V1]
+y$func <- factor(y$func, levels = c("quadratic", "log-linear", "linear",
+                                              "logarithmic"))
 ggplot(y)+
   geom_line(aes(input, output, color=func))+
   scale_x_continuous(breaks=c(1:10))+
