@@ -28,7 +28,7 @@ area_under_curve(dt$FPR, dt$TPR)
 ggplot(dt)+
   geom_point(aes(FPR, TPR))+
   geom_text(aes(FPR, TPR, label = paste("q=", q, sep = ' ')),nudge_y =  -0.02, nudge_x = 0.05)+
-  geom_text(aes(0.5 , 0.75, label = paste('AUC =', AUC, sep = ' ')), size = 6)+
+  geom_text(aes(0.5 , 0.75, label = paste('AUC =', AUC, sep = ' ')), size = 9)+
   geom_line(aes(FPR, TPR))+
   geom_area(aes(FPR, TPR), alpha = 0.2)+
   xlab("False Positive Rate")+
@@ -39,6 +39,6 @@ ggplot(dt)+
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "black"),
-        text = element_text(size = 20, face = "bold"))
+        text = element_text(size = 22, face = "bold"))
   
   
