@@ -29,7 +29,7 @@ points <- data.table(
 )
 
 colnames(dt) <- c('H1', 'H2', 'H3', 'H4','H5', 'y')
-tikz(file = hinge-loss.tex)
+tikz(file = 'hinge-loss.tex', standAlone = TRUE)
 plot <- ggplot(dt)+
     geom_line(aes(H1, y))+
     geom_line(aes(H2, y))+
@@ -46,6 +46,8 @@ plot <- ggplot(dt)+
     xlab("Augmented Predictions")+
     ylab("Loss")+
     ggtitle("How Sorted Augmented Predictions Acrue Loss")
-plot.new()
 print(plot)
+dev.off()
+# Error in plot.xy(xy.coords(x, y), type = type, ...) : 
+  # plot.new has not been called yet
 
