@@ -1,5 +1,5 @@
 library(data.table)
-library(latex2exp)
+library(tikzDevice)
 library(ggplot2)
 
 parabola <- function(h){
@@ -29,19 +29,23 @@ points <- data.table(
 )
 
 colnames(dt) <- c('H1', 'H2', 'H3', 'H4','H5', 'y')
-ggplot(dt)+
-  geom_line(aes(H1, y))+
-  geom_line(aes(H2, y))+
-  geom_line(aes(H3, y))+
-  geom_line(aes(H4, y))+
-  geom_line(aes(H5, y))+
-  geom_point(data = points, aes(x, y))+
-  geom_text(data = points, aes(x,y, label = h, size = 10), nudge_y = 1)+
-  geom_segment(aes(x = -5, xend = -3,y = -0.75, yend = -0.75), size = 3, color = 'red')+
-  geom_segment(aes(x = 1, xend = 3,y = -1.5, yend = -1.5), size = 3, color = 'red')+
-  geom_segment(aes(x = -5, xend = 3,y = -2.25, yend = -2.25), size = 3, color = 'red')+
-  theme(text = element_text(size = 20),
-        legend.position = 'none')+
-  xlab("Augmented Predictions")+
-  ylab("Loss")+
-  ggtitle("How Sort ")
+tikz(file = hinge-loss.tex)
+plot <- ggplot(dt)+
+    geom_line(aes(H1, y))+
+    geom_line(aes(H2, y))+
+    geom_line(aes(H3, y))+
+    geom_line(aes(H4, y))+
+    geom_line(aes(H5, y))+
+    geom_point(data = points, aes(x, y))+
+    geom_text(data = points, aes(x,y, label = h, size = 10), nudge_y = 1)+
+    geom_segment(aes(x = -5, xend = -3,y = -0.75, yend = -0.75), size = 3, color = 'red')+
+    geom_segment(aes(x = 1, xend = 3,y = -1.5, yend = -1.5), size = 3, color = 'red')+
+    geom_segment(aes(x = -5, xend = 3,y = -2.25, yend = -2.25), size = 3, color = 'red')+
+    theme(text = element_text(size = 20),
+          legend.position = 'none')+
+    xlab("Augmented Predictions")+
+    ylab("Loss")+
+    ggtitle("How Sorted Augmented Predictions Acrue Loss")
+plot.new()
+print(plot)
+
