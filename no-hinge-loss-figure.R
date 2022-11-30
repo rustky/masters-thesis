@@ -4,7 +4,7 @@ library(ggplot2)
 
 parabola <- function(x, b){
   c <- -b/x
-  parabola <- x^2 + b*x + c
+  parabola <- x^2 + b*x + 1
 }
 b_vals <- c(2,-4)
 x <- seq(-4, 4, by = 0.25)
@@ -20,7 +20,12 @@ dt$y_total <- dt$y_2 + dt$y_4
 dt$y_color_total <- rep("y_total", nrow(dt))
 dt$x <- x
 
-dt.tall <- melt(dt, id.vars = c("x"), measure.vars = c("y_[2,4,t]", "y_color*"), value.name = c("value", "color"))
+dt.tall <- melt(dt, id.vars = c("x"), measure.vars = c("y_2", "y_4", "y_total"), variable.name = "color",
+               value.name = c("y"))
+
+ggplot(dt.tall)+
+  geom_line(aes(x, y, color= color ))
+
 
 standAlone <- TRUE
 suffix <- if(standAlone)"-standAlone" else ""
