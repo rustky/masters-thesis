@@ -42,9 +42,9 @@ plot <- ggplot(dt)+
               nudge_y = -.5)+
     geom_text(data = points[c(2,4),], aes(x,y, label = h), size = 8,
               nudge_y = .5, nudge_x = .5)+
-    geom_segment(aes(x = -5, xend = -3,y = -1.25, yend = -1.25), linewidth = 3, color = 'red')+
-    geom_segment(aes(x = 1, xend = 3,y = -2, yend = -2), linewidth = 3, color = 'red')+
-    geom_segment(aes(x = -5, xend = 3,y = -2.75, yend = -2.75), linewidth = 3, color = 'red')+
+    geom_segment(aes(x = -5, xend = -3,y = -1.25, yend = -1.25, size = 3), color = 'red')+
+    geom_segment(aes(x = 1, xend = 3,y = -2, yend = -2, size = 3), color = 'red')+
+    geom_segment(aes(x = -5, xend = 3,y = -2.75, yend = -2.75, size = 3), color = 'red')+
     theme(text = element_text(size = 20),
           legend.position = 'none')+
     xlab("Augmented Predictions")+
