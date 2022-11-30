@@ -29,45 +29,50 @@ for(b in b_vals){
 }
 
 dt <- data.table(data.frame(x.list))
-dt$y_total <- dt$y_2 + dt$y_4
-dt$y_color_total <- rep("y-total", nrow(dt))
-dt$x <- x
-dt$y_set_total <- '$\\mathcal{I^-}$'
+dt$y.total <- dt$y.2 + dt$y.4
+dt$y.color.total <- rep("y-total", nrow(dt))
+dt$predicted.value <- x
+dt$y.set.total <- '$\\mathcal{I^-}$'
 
-dt.tall <- melt(dt, id.vars = c("x"), measure.vars = c("y-2", "y-4", "y-8", "y-total"),
+dt.tall <- melt(dt, id.vars = c("predicted.value"), measure.vars = c("y.2", "y.4", "y.8", "y.total"),
                 variable.name = "color", value.name = c("y"))
-set.dt <- melt(dt, measure.vars = c("y-set-2", "y-set-4", "y-set-8", "y-set-total"), variable.name = "name", value.name = "set")
-plot.dt <- data.table(dt.tall, set.dt$set)
+set.dt <- melt(dt, measure.vars = c("y.set.2", "y.set.4", "y.set.8", "y.set.total"), variable.name = "name", value.name = "set")
+plot.dt <- data.table(dt.tall, set= set.dt$set)
+plot.dt$set <- factor(plot.dt$set, levels = c('$\\mathcal{I^+}$', '$\\mathcal{I^-}$'))
 
-ggplot(plot.dt)+
-  geom_line(aes(x, y, color= color ))+
-  geom_segment(data = plot.dt[(x == 4)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
-                   arrow=arrow(length = unit(0.1, "cm")))+
-  geom_segment(data = plot.dt[(x == 3)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
-               arrow=arrow(length = unit(0.1, "cm")))+
-  geom_segment(data = plot.dt[(x == -1)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
-               arrow=arrow(length = unit(0.1, "cm")))+
-  facet_grid(. ~ V2)
+# ggplot(plot.dt)+
+#   geom_line(aes(x, y, color= color ))+
+#   geom_segment(data = plot.dt[(x == 4)&(V2 == "$\\mathcal{I^-}$")],
+#                aes(x = x, xend = x, y = 0, yend = y),
+#                    arrow=arrow(length = unit(0.1, "cm")))+
+#   geom_segment(data = plot.dt[(x == 3)&(V2 == "$\\mathcal{I^-}$")],
+#                aes(x = x, xend = x, y = 0, yend = y),
+#                arrow=arrow(length = unit(0.1, "cm")))+
+#   geom_segment(data = plot.dt[(x == -1)&(V2 == "$\\mathcal{I^-}$")],
+#                aes(x = x, xend = x, y = 0, yend = y),
+#                arrow=arrow(length = unit(0.1, "cm")))+
+#   facet_grid(. ~ V2)
 
 standAlone <- TRUE
 suffix <- if(standAlone)"-standAlone" else ""
-tikz(file = '~/Documents/masters-thesis/no-hinge-loss.tex', standAlone = standAlone)
+tikz(file = '~/Documents/masters-thesis/no-hinge-loss.tex', standAlone = standAlone,
+     width = 6, height = 4)
 
 plot <- ggplot(plot.dt)+
-  geom_line(aes(x, y, color= color ))+
-  geom_segment(data = plot.dt[(x == 4)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
+  geom_line(aes(predicted.value, y, color= color ))+
+  geom_segment(data = plot.dt[(predicted.value == 4)&(set == "$\\mathcal{I^-}$")],
+               aes(x = predicted.value, xend = predicted.value, y = 0, yend = y),
                arrow=arrow(length = unit(0.1, "cm")))+
-  geom_segment(data = plot.dt[(x == 3)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
+  geom_segment(data = plot.dt[(x == 3)&(set == "$\\mathcal{I^-}$")],
+               aes(x = predicted.value, xend = predicted.value, y = 0, yend = y),
                arrow=arrow(length = unit(0.1, "cm")))+
-  geom_segment(data = plot.dt[(x == -1)&(V2 == "$\\mathcal{I^-}$")],
-               aes(x = x, xend = x, y = 0, yend = y),
+  geom_segment(data = plot.dt[(x == -1)&(set == "$\\mathcal{I^-}$")],
+               aes(x = predicted.value, xend = predicted.value, y = 0, yend = y),
                arrow=arrow(length = unit(0.1, "cm")))+
-  facet_grid(. ~ V2)
+  ylim(0,75)+
+  facet_grid(. ~ set)+
+  theme(legend.position="none",
+        text = element_text(size = 20))
 
 print(plot)
 dev.off()

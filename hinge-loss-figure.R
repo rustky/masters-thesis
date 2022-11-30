@@ -32,15 +32,16 @@ points <- data.table(
 colnames(dt) <- c('H1', 'H3','H5', 'y')
 standAlone <- TRUE
 suffix <- if(standAlone)"-standAlone" else ""
-tikz(file = '~/Documents/masters-thesis/hinge-loss.tex', standAlone = standAlone)
+tikz(file = '~/Documents/masters-thesis/hinge-loss.tex', standAlone = standAlone,
+     width = 6, height = 4)
 plot <- ggplot(dt)+
     geom_line(aes(H1, y))+
     geom_line(aes(H3, y))+
     geom_line(aes(H5, y))+
     geom_point(data = points, aes(x, y))+
-    geom_text(data = points[c(1,3,5),], aes(x,y, label = h), size = 8,
+    geom_text(data = points[c(1,3,5),], aes(x,y, label = h), size = 6,
               nudge_y = -.5)+
-    geom_text(data = points[c(2,4),], aes(x,y, label = h), size = 8,
+    geom_text(data = points[c(2,4),], aes(x,y, label = h), size = 6,
               nudge_y = .5, nudge_x = .5)+
     geom_segment(aes(x = -5, xend = -3,y = -1.25, yend = -1.25, size = 3), color = 'red')+
     geom_segment(aes(x = 1, xend = 3,y = -2, yend = -2, size = 3), color = 'red')+
