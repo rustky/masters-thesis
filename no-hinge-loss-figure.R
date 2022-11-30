@@ -69,10 +69,12 @@ plot <- ggplot(plot.dt)+
   geom_segment(data = plot.dt[(x == -1)&(set == "$\\mathcal{I^-}$")],
                aes(x = predicted.value, xend = predicted.value, y = 0, yend = y),
                arrow=arrow(length = unit(0.1, "cm")))+
+  xlab("Predicted Value")+
+  ggtitle("Square Loss Accrues Loss")+
   ylim(0,75)+
   facet_grid(. ~ set)+
   theme(legend.position="none",
-        text = element_text(size = 20))
+        text = element_text(size = 16))
 
 print(plot)
 dev.off()

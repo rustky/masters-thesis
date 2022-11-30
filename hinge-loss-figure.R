@@ -46,11 +46,11 @@ plot <- ggplot(dt)+
     geom_segment(aes(x = -5, xend = -3,y = -1.25, yend = -1.25, size = 3), color = 'red')+
     geom_segment(aes(x = 1, xend = 3,y = -2, yend = -2, size = 3), color = 'red')+
     geom_segment(aes(x = -5, xend = 3,y = -2.75, yend = -2.75, size = 3), color = 'red')+
-    theme(text = element_text(size = 20),
+    theme(text = element_text(size = 16),
           legend.position = 'none')+
     xlab("Augmented Predictions")+
     ylab("Loss")+
-    ggtitle("Sorted Predictions Acrue Loss")+
+    ggtitle("Sorted Predictions Accrues Loss")+
     ylim(-2.9, 9)
 print(plot)
 dev.off()
