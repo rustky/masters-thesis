@@ -42,7 +42,7 @@ plot <- ggplot(dt)+
     geom_text(data = points[c(1,3,5),], aes(x,y, label = h), size = 6,
               nudge_y = -.5)+
     geom_text(data = points[c(2,4),], aes(x,y, label = h), size = 6,
-              nudge_y = .5, nudge_x = .5)+
+              nudge_y = .7, nudge_x = .5)+
     geom_segment(aes(x = -5, xend = -3,y = -1.25, yend = -1.25, size = 3), color = 'red')+
     geom_segment(aes(x = 1, xend = 3,y = -2, yend = -2, size = 3), color = 'red')+
     geom_segment(aes(x = -5, xend = 3,y = -2.75, yend = -2.75, size = 3), color = 'red')+
