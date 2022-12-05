@@ -10,7 +10,9 @@ dt$y <- ifelse(dt$x<=0, 1 , 0)
 tikz(file = '~/Documents/masters-thesis/zero-one-loss.tex',height =2,standAlone = TRUE)
 gg <- ggplot(dt)+
   geom_line(aes(x,y))+
-  ggtitle('Zero-One Loss $\\ell(z)=I[z < 0]$')
+  ggtitle('Zero-One Loss $\\ell(z)=I[z < 0]$')+
+  xlab("$z$")+
+  ylab("$\\ell(z)$")
 plot(gg)
 dev.off()
 
