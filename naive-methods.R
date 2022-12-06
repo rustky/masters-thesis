@@ -23,9 +23,10 @@ plot <- ggplot(dt)+
   geom_line(aes(predicted.value, output))+
   facet_grid(.~label,
              labeller = label_both)+
-  ggtitle("Square Loss $\\ell(y_i, \\hat{y_i}) = (\\hat{y_i} - y_i)^2$")+
-  xlab("Predicted Value: $\\hat{y_i}$")+
-  ylab("Loss Output: $\\ell(y_i, \\hat{y_i})$")
+  ggtitle("Square Loss $\\ell(y_i, \\hat{y_i}) = (\\hat{y_j} - \\hat{y_k})^2$")+
+  xlab("Predicted Value: $\\hat{y_j} - \\hat{y_k}$")+
+  ylab("Loss Output: $\\ell(y_i, \\hat{y_i})$")+
+  theme(text = element_text(size = 14))
 
 print(plot)
 dev.off()

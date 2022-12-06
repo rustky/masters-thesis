@@ -17,7 +17,7 @@ quadratic <- function(x){
   x^2
 }
 functions <- c("linear"=linear, "logarithmic"=log, "log-linear"=log.linear, "quadratic"=quadratic)
-big.O <- c("linear"="O(n)", "logarithmic"="$O(\\logn$)", "log-linear"="$O(n\\logn)$", "quadratic"="$O(n^2)$")
+big.O <- c("linear"="O(n)", "logarithmic"="$O(\\log n$)", "log-linear"="$O(n\\log n)$", "quadratic"="$O(n^2)$")
 y.list <- list()
 for(i in names(functions)){
   for(input in x){
@@ -35,10 +35,10 @@ y$input <- rep(1:10,4)
 y.label <- y[y[, .I[output == max(output)], by=func]$V1]
 y$func <- factor(y$func, levels = c("quadratic", "log-linear", "linear",
                                               "logarithmic"))
-tikz(file = '~/../../Documents/Research/masters-thesis/big-o-review.tex', standAlone = TRUE,
+tikz(file = '~/Documents/masters-thesis/big-o-review.tex', standAlone = TRUE,
      width = 6, height = 4)
 plot <- ggplot(y)+
-  geom_line(aes(input, output, color=func))+
+  geom_line(aes(input, output, color=func, size = .5))+
   scale_x_continuous(breaks=c(1:10))+
   geom_label(data = y.label, aes(x=input, y=output, label=algorithm),
              nudge_x = -0.35,
@@ -48,5 +48,5 @@ plot <- ggplot(y)+
   xlab("Input size $n$")
 print(plot)
 dev.off()
-tinytex::pdflatex('~/../../Documents/Research/masters-thesis/big-o-review.tex')
+tinytex::pdflatex('~/Documents/masters-thesis/big-o-review.tex')
   
