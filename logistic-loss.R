@@ -13,14 +13,15 @@ dt <- data.table(
 dt$output <- logistic.loss(dt$label, dt$predicted.value)
 
 tikz(file = '~/Documents/masters-thesis/logistic-loss.tex', standAlone = TRUE,
-     width = 6, height = 4)
+     width = 6, height = 3)
 plot <- ggplot(dt)+
   geom_line(aes(predicted.value, output))+
   facet_grid(.~label,
              labeller = label_both)+
-  ggtitle("Logistic Loss $\\ell(y_i, \\hat{y_i}) = \\log(1 + e^{-y_i \\hat{y_i}})$")+
-  xlab("Predicted Value: $\\hat{y_i}$")+
-  ylab("Loss Output: $\\ell(y_i, \\hat{y_i})$")
+  ggtitle("Logistic Loss $\\ell(y_i, \\hat{y}_i) = \\log(1 + e^{-y_i \\hat{y}_i})$")+
+  xlab("Predicted Value: $\\hat{y}_i$")+
+  ylab("Loss Output: $\\ell(y_i, \\hat{y}_i)$")+
+  theme(text = element_text(size = 14))
 
 print(plot)
 dev.off()

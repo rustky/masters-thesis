@@ -17,7 +17,7 @@ quadratic <- function(x){
   x^2
 }
 functions <- c("linear"=linear, "logarithmic"=log, "log-linear"=log.linear, "quadratic"=quadratic)
-big.O <- c("linear"="O(n)", "logarithmic"="$O(\\log n$)", "log-linear"="$O(n\\log n)$", "quadratic"="$O(n^2)$")
+big.O <- c("linear"="O($n$)", "logarithmic"="$O(\\log n$)", "log-linear"="$O(n\\log n)$", "quadratic"="$O(n^2)$")
 y.list <- list()
 for(i in names(functions)){
   for(input in x){
@@ -38,14 +38,15 @@ y$func <- factor(y$func, levels = c("quadratic", "log-linear", "linear",
 tikz(file = '~/Documents/masters-thesis/big-o-review.tex', standAlone = TRUE,
      width = 6, height = 4)
 plot <- ggplot(y)+
-  geom_line(aes(input, output, color=func, size = .5))+
+  geom_line(aes(input, output, color=func), size = 1.5)+
   scale_x_continuous(breaks=c(1:10))+
   geom_label(data = y.label, aes(x=input, y=output, label=algorithm),
-             nudge_x = -0.35,
+             nudge_x = -0.45,
              nudge_y = 3)+
   ggtitle("Big-O Notation Review")+
-  ylab("Output of $f(n)$")+
-  xlab("Input size $n$")
+  ylab("Output of $foo(n)$")+
+  xlab("Input size $n$")+
+  theme(text = element_text(size = 11.5))
 print(plot)
 dev.off()
 tinytex::pdflatex('~/Documents/masters-thesis/big-o-review.tex')

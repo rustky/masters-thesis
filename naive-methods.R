@@ -18,14 +18,14 @@ dt <- data.table(
 dt$output <- square.loss(dt$label, dt$predicted.value)
 
 tikz(file = '~/Documents/masters-thesis/naive-methods.tex', standAlone = TRUE,
-     width = 6, height = 4)
+     width = 6, height = 3)
 plot <- ggplot(dt)+
   geom_line(aes(predicted.value, output))+
   facet_grid(.~label,
              labeller = label_both)+
-  ggtitle("Square Loss $\\ell(y_i, \\hat{y_i}) = (\\hat{y_j} - \\hat{y_k})^2$")+
-  xlab("Predicted Value: $\\hat{y_j} - \\hat{y_k}$")+
-  ylab("Loss Output: $\\ell(y_i, \\hat{y_i})$")+
+  ggtitle("Square Loss $\\ell(\\hat{y}_j, \\hat{y}_k) = (\\hat{y}_j - \\hat{y}_k)^2$")+
+  xlab("Predicted Value: $\\hat{y}_j - \\hat{y}_k$")+
+  ylab("Loss Output: $\\ell(\\hat{y}_j, \\hat{y}_k)$")+
   theme(text = element_text(size = 14))
 
 print(plot)
